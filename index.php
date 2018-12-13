@@ -68,7 +68,7 @@ $service = new Google_Service_Sheets( $client );
 
 
 // Table ID
-$spreadsheetId = '1gq5EPyxqNGbsEXep-BYFabE1NFI2KqAEqb9w2RYSFmc';
+$spreadsheetId = '1XmgO8sQN5O6DuzM0yxjMe84tWzEd_fv3gKIoVebE1w8';
 
 /**
  * Getting information about the table and sheets
@@ -102,9 +102,9 @@ foreach ($response->getSheets() as $sheet) {
 
 // https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/update
 $values = [
-    ["",],
-    ["name", "phone", "mail"],
-    ["vasa", "123", "test@sdf.xcv"],
+
+    ["", "Wednesday, December 12 2018", "6:00:00 AM", "Volody", "", "", "", "", "pivnychenko.light.it@gmail.com", "11111111"],
+
 
 ];
 $body    = new Google_Service_Sheets_ValueRange( [ 'values' => $values ] );
@@ -112,12 +112,12 @@ $body    = new Google_Service_Sheets_ValueRange( [ 'values' => $values ] );
 // valueInputOption - определяет способ интерпретации входных данных
 // https://developers.google.com/sheets/api/reference/rest/v4/ValueInputOption
 // RAW | USER_ENTERED
-$options = array( 'valueInputOption' => 'USER_ENTERED' );
+$options = array( 'valueInputOption' => 'RAW' );
 
 //$service->spreadsheets_values->update( $spreadsheetId, 'Лист1', $body, $options );
 
 
-$my_set = $service->spreadsheets_values->append($spreadsheetId, $titlelist, $body, $options);
+$my_set = $service->spreadsheets_values->append($spreadsheetId, 'Bookings', $body, $options);
 
 /**
  * Getting the contents of the specified sheet
@@ -126,7 +126,7 @@ $my_set = $service->spreadsheets_values->append($spreadsheetId, $titlelist, $bod
 // Примеры:
 // "Лист 1" - вернёт всё содержимое листа с указанным названием
 // "Лист 1!B2:D4" - вернёт данные, находящиеся в диапазоне B2:D4 на листе с названием "Лист 1"
-$range = $titlelist;
+$range = 'Bookings';
 //$response = $service->spreadsheets_values->get($spreadsheetId, $range);
 
 $response2 = $service->spreadsheets_values->get($spreadsheetId, $range, ['valueRenderOption' => 'FORMATTED_VALUE']);
